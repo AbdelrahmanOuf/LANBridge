@@ -31,7 +31,8 @@ def verified_cleanup(store: Store, spec: TaskSpec) -> dict:
     from ctypes import wintypes
 
     class Disposition(ctypes.Structure):
-        _fields_ = [('DeleteFile', wintypes.BOOL)]
+        # FILE_DISPOSITION_INFO uses a one-byte BOOLEAN, not Win32's four-byte BOOL.
+        _fields_ = [('DeleteFile', ctypes.c_ubyte)]
 
     kernel = ctypes.WinDLL('kernel32', use_last_error=True)
     setter = kernel.SetFileInformationByHandle
@@ -57,11 +58,11 @@ def verified_cleanup(store: Store, spec: TaskSpec) -> dict:
             dst = safe_path(entry['target'], must_exist=True)
             source_handle = win32file.CreateFile(str(src), win32con.GENERIC_READ | win32con.DELETE,
                 win32con.FILE_SHARE_READ, None, win32con.OPEN_EXISTING,
-                win32con.FILE_FLAG_OPEN_REPARSE_POINT | win32con.FILE_FLAG_SEQUENTIAL_SCAN, None)
+                win32file.FILE_FLAG_OPEN_REPARSE_POINT | win32file.FILE_FLAG_SEQUENTIAL_SCAN, None)
             try:
                 destination_handle = win32file.CreateFile(str(dst), win32con.GENERIC_READ,
                     win32con.FILE_SHARE_READ, None, win32con.OPEN_EXISTING,
-                    win32con.FILE_FLAG_OPEN_REPARSE_POINT | win32con.FILE_FLAG_SEQUENTIAL_SCAN, None)
+                    win32file.FILE_FLAG_OPEN_REPARSE_POINT | win32file.FILE_FLAG_SEQUENTIAL_SCAN, None)
                 try:
                     for handle in (source_handle, destination_handle):
                         if win32file.GetFileInformationByHandle(handle)[0] & 0x400:
