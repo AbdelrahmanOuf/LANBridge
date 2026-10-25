@@ -4,6 +4,7 @@ import os
 import subprocess
 import sys
 import threading
+import uuid
 from collections.abc import Callable
 from pathlib import Path
 
@@ -93,7 +94,9 @@ class ProcessRunner:
         import win32event
         import win32process
 
-        job = win32job.CreateJobObject(None, None)
+        # pywin32 310 requires a string for the Job name. Use a unique local
+        # name so the supervised object cannot collide with another session.
+        job = win32job.CreateJobObject(None, 'LANBridgePro-' + uuid.uuid4().hex)
         limits = win32job.QueryInformationJobObject(job, win32job.JobObjectExtendedLimitInformation)
         limits["BasicLimitInformation"]["LimitFlags"] |= win32job.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
         win32job.SetInformationJobObject(job, win32job.JobObjectExtendedLimitInformation, limits)
