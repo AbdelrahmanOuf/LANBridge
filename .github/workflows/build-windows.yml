@@ -42,12 +42,14 @@ jobs:
           architecture: x64
           cache: pip
           cache-dependency-path: requirements-lock.txt
-      - name: Install pinned dependencies
+      - name: Install pinned dependencies in an isolated build environment
         shell: powershell
         run: |
-          python -m pip install -r requirements-lock.txt
+          python -m venv .venv-ci
+          if ($LASTEXITCODE -ne 0) { throw 'Build environment creation failed.' }
+          & .\.venv-ci\Scripts\python.exe -m pip install -r requirements-lock.txt
           if ($LASTEXITCODE -ne 0) { throw 'Dependency installation failed.' }
-          python -m pip install --no-build-isolation --no-deps -e .
+          & .\.venv-ci\Scripts\python.exe -m pip install --no-build-isolation --no-deps -e .
           if ($LASTEXITCODE -ne 0) { throw 'Package installation failed.' }
       - name: Parse Windows PowerShell 5.1 scripts
         shell: powershell
@@ -55,7 +57,7 @@ jobs:
       - name: Build and execute the actual packaged application self-test
         shell: powershell
         run: |
-          python build.py
+          & .\.venv-ci\Scripts\python.exe build.py
           if ($LASTEXITCODE -ne 0) { throw 'Windows build or frozen application self-test failed.' }
       - name: Upload build evidence
         if: always()
