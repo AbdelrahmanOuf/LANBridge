@@ -1,0 +1,81 @@
+name: Windows build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "packaging/**"
+      - "tools/check_powershell.ps1"
+      - "requirements*.txt"
+      - "pyproject.toml"
+      - "build.py"
+      - "build.ps1"
+      - ".github/workflows/build-windows.yml"
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Windows x64 / native tests and frozen EXE
+    runs-on: windows-2022
+    timeout-minutes: 30
+    env:
+      QT_QPA_PLATFORM: offscreen
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+          architecture: x64
+          cache: pip
+          cache-dependency-path: requirements-lock.txt
+      - name: Install pinned dependencies
+        shell: powershell
+        run: |
+          python -m pip install -r requirements-lock.txt
+          if ($LASTEXITCODE -ne 0) { throw 'Dependency installation failed.' }
+          python -m pip install --no-build-isolation --no-deps -e .
+          if ($LASTEXITCODE -ne 0) { throw 'Package installation failed.' }
+      - name: Parse Windows PowerShell 5.1 scripts
+        shell: powershell
+        run: .\tools\check_powershell.ps1
+      - name: Build and execute the actual packaged application self-test
+        shell: powershell
+        run: |
+          python build.py
+          if ($LASTEXITCODE -ne 0) { throw 'Windows build or frozen application self-test failed.' }
+      - name: Upload build evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: windows-build-evidence
+          path: |
+            dist/*selftest*.json
+            dist/build-report.json
+            build/LANBridgePro/warn-LANBridgePro.txt
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Upload tested development bundle
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: LANBridgePro-Windows-x64-preview
+          path: |
+            dist/LANBridgePro-Windows-x64.zip
+            dist/LANBridgePro.exe.sha256
+            dist/LANBridgePro-Setup.exe
+          if-no-files-found: error
+          retention-days: 30

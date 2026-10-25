@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Arabic user guide / دليل الاستخدام
+    url: https://github.com/AbdelrahmanOuf/LANBridge/blob/main/docs/USER_GUIDE_AR.md
+    about: Read setup, sharing, transfer and resume instructions before reporting a problem.
+  - name: Security reporting
+    url: https://github.com/AbdelrahmanOuf/LANBridge/blob/main/SECURITY.md
+    about: Report vulnerabilities privately; never publish secrets in an issue.

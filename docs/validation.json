@@ -1,0 +1,41 @@
+{
+  "generated_utc": "2026-10-25T13:07:16.468516+00:00",
+  "python": "3.12.14",
+  "host_platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "ruff": "All checks passed!",
+  "python_ast_files": 48,
+  "tests": {
+    "total": 86,
+    "passed": 81,
+    "skipped": 5,
+    "failed": 0,
+    "skip_reasons": [
+      {
+        "test": "test_unicode_many_files_large_empty_and_repeat",
+        "reason": "Explicit two-PC Windows LAN fixtures required"
+      },
+      {
+        "test": "test_single_file_smb",
+        "reason": "Explicit two-PC Windows LAN fixtures required"
+      },
+      {
+        "test": "test_native_temp_copy_and_skip",
+        "reason": "Real Windows host required"
+      },
+      {
+        "test": "test_locked_source_rejected",
+        "reason": "Real Windows host required"
+      },
+      {
+        "test": "test_local_source_move_requires_hash_and_retains_destination",
+        "reason": "Real Windows host required"
+      }
+    ]
+  },
+  "xml_manifest_and_svg": "parsed successfully",
+  "windows_exe_built_here": false,
+  "actual_compiled_exe_test_here": false,
+  "uac_mutations_tested_here": false,
+  "two_pc_lan_tested_here": false,
+  "note": "Native/integration skips are NOT successful results. See WINDOWS_ACCEPTANCE.md."
+}

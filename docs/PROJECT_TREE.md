@@ -1,0 +1,124 @@
+# Project tree / شجرة المشروع
+
+LANBridge/
+
+- **.github/**
+  - **ISSUE_TEMPLATE/**
+    - [bug_report.yml](../.github/ISSUE_TEMPLATE/bug_report.yml)
+    - [config.yml](../.github/ISSUE_TEMPLATE/config.yml)
+    - [feature_request.yml](../.github/ISSUE_TEMPLATE/feature_request.yml)
+  - **workflows/**
+    - [build-windows.yml](../.github/workflows/build-windows.yml)
+    - [ci.yml](../.github/workflows/ci.yml)
+  - [dependabot.yml](../.github/dependabot.yml)
+  - [pull_request_template.md](../.github/pull_request_template.md)
+- **docs/**
+  - **previews/**
+    - [dashboard-ar-dark.png](../docs/previews/dashboard-ar-dark.png)
+    - [dashboard-en-light.png](../docs/previews/dashboard-en-light.png)
+    - [network-ar-dark.png](../docs/previews/network-ar-dark.png)
+    - [transfer-ar-dark.png](../docs/previews/transfer-ar-dark.png)
+  - [ARCHITECTURE.md](../docs/ARCHITECTURE.md)
+  - [GITHUB_DISCOVERY.md](../docs/GITHUB_DISCOVERY.md)
+  - [PROJECT_TREE.md](../docs/PROJECT_TREE.md)
+  - [USER_GUIDE_AR.md](../docs/USER_GUIDE_AR.md)
+  - [VALIDATION_REPORT.md](../docs/VALIDATION_REPORT.md)
+  - [WINDOWS_ACCEPTANCE.md](../docs/WINDOWS_ACCEPTANCE.md)
+  - [test-results.xml](../docs/test-results.xml)
+  - [validation.json](../docs/validation.json)
+- **packaging/**
+  - [LANBridgePro.manifest](../packaging/LANBridgePro.manifest)
+  - [LANBridgePro.spec](../packaging/LANBridgePro.spec)
+  - [installer.iss](../packaging/installer.iss)
+  - [version_info.txt](../packaging/version_info.txt)
+- **src/**
+  - **lanbridge/**
+    - **core/**
+      - [__init__.py](../src/lanbridge/core/__init__.py)
+      - [errors.py](../src/lanbridge/core/errors.py)
+      - [logging_config.py](../src/lanbridge/core/logging_config.py)
+      - [models.py](../src/lanbridge/core/models.py)
+      - [paths.py](../src/lanbridge/core/paths.py)
+      - [store.py](../src/lanbridge/core/store.py)
+    - **network/**
+      - [__init__.py](../src/lanbridge/network/__init__.py)
+      - [conflicts.py](../src/lanbridge/network/conflicts.py)
+      - [diagnostics.py](../src/lanbridge/network/diagnostics.py)
+      - [discovery.py](../src/lanbridge/network/discovery.py)
+      - [validation.py](../src/lanbridge/network/validation.py)
+    - **platform/**
+      - [__init__.py](../src/lanbridge/platform/__init__.py)
+      - [powershell.py](../src/lanbridge/platform/powershell.py)
+      - [windows_paths.py](../src/lanbridge/platform/windows_paths.py)
+    - **resources/**
+      - [app.ico](../src/lanbridge/resources/app.ico)
+      - [app.png](../src/lanbridge/resources/app.png)
+      - [app.svg](../src/lanbridge/resources/app.svg)
+      - [dashboard.svg](../src/lanbridge/resources/dashboard.svg)
+      - [devices.svg](../src/lanbridge/resources/devices.svg)
+      - [diagnostics.svg](../src/lanbridge/resources/diagnostics.svg)
+      - [history.svg](../src/lanbridge/resources/history.svg)
+      - [network.svg](../src/lanbridge/resources/network.svg)
+      - [refresh.svg](../src/lanbridge/resources/refresh.svg)
+      - [settings.svg](../src/lanbridge/resources/settings.svg)
+      - [share.svg](../src/lanbridge/resources/share.svg)
+      - [transfer.svg](../src/lanbridge/resources/transfer.svg)
+      - [windows.ps1](../src/lanbridge/resources/windows.ps1)
+    - **security/**
+      - [__init__.py](../src/lanbridge/security/__init__.py)
+      - [admin.py](../src/lanbridge/security/admin.py)
+      - [credentials.py](../src/lanbridge/security/credentials.py)
+    - **services/**
+      - [__init__.py](../src/lanbridge/services/__init__.py)
+      - [application.py](../src/lanbridge/services/application.py)
+    - **transfer/**
+      - [__init__.py](../src/lanbridge/transfer/__init__.py)
+      - [engine.py](../src/lanbridge/transfer/engine.py)
+      - [move.py](../src/lanbridge/transfer/move.py)
+      - [planning.py](../src/lanbridge/transfer/planning.py)
+      - [robocopy.py](../src/lanbridge/transfer/robocopy.py)
+      - [verification.py](../src/lanbridge/transfer/verification.py)
+    - **ui/**
+      - [__init__.py](../src/lanbridge/ui/__init__.py)
+      - [dialogs.py](../src/lanbridge/ui/dialogs.py)
+      - [i18n.py](../src/lanbridge/ui/i18n.py)
+      - [main_window.py](../src/lanbridge/ui/main_window.py)
+      - [style.py](../src/lanbridge/ui/style.py)
+      - [widgets.py](../src/lanbridge/ui/widgets.py)
+      - [workers.py](../src/lanbridge/ui/workers.py)
+    - [__init__.py](../src/lanbridge/__init__.py)
+    - [__main__.py](../src/lanbridge/__main__.py)
+    - [selftest.py](../src/lanbridge/selftest.py)
+- **tests/**
+  - **integration/**
+    - [test_lan.py](../tests/integration/test_lan.py)
+    - [test_windows_native.py](../tests/integration/test_windows_native.py)
+  - **unit/**
+    - [test_core.py](../tests/unit/test_core.py)
+    - [test_engine.py](../tests/unit/test_engine.py)
+    - [test_reliability.py](../tests/unit/test_reliability.py)
+    - [test_security.py](../tests/unit/test_security.py)
+    - [test_ui.py](../tests/unit/test_ui.py)
+  - [conftest.py](../tests/conftest.py)
+- **tools/**
+  - [check_powershell.ps1](../tools/check_powershell.ps1)
+  - [create_assets.py](../tools/create_assets.py)
+  - [download_wheels.ps1](../tools/download_wheels.ps1)
+  - [package_source.py](../tools/package_source.py)
+  - [render_previews.py](../tools/render_previews.py)
+  - [verify_project.py](../tools/verify_project.py)
+- [.editorconfig](../.editorconfig)
+- [.gitattributes](../.gitattributes)
+- [.gitignore](../.gitignore)
+- [CONTRIBUTING.md](../CONTRIBUTING.md)
+- [NOTICE.md](../NOTICE.md)
+- [README.ar.md](../README.ar.md)
+- [README.md](../README.md)
+- [SECURITY.md](../SECURITY.md)
+- [build.ps1](../build.ps1)
+- [build.py](../build.py)
+- [pyproject.toml](../pyproject.toml)
+- [requirements-dev.txt](../requirements-dev.txt)
+- [requirements-lock.txt](../requirements-lock.txt)
+- [requirements.txt](../requirements.txt)
+- [run.ps1](../run.ps1)

@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools==78.1.1", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lanbridge-pro"
+version = "1.0.0"
+description = "Resumable Windows LAN file transfer over Ethernet using SMB, Robocopy and PySide6"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = ["PySide6==6.8.3", "pywin32==310; sys_platform == 'win32'"]
+keywords = ["lan", "ethernet", "file-transfer", "robocopy", "smb", "windows", "pyside6", "resumable-transfer"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Networking",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/AbdelrahmanOuf/LANBridge"
+Repository = "https://github.com/AbdelrahmanOuf/LANBridge.git"
+Issues = "https://github.com/AbdelrahmanOuf/LANBridge/issues"
+Documentation = "https://github.com/AbdelrahmanOuf/LANBridge/blob/main/README.md"
+
+[project.optional-dependencies]
+dev = ["pytest==8.3.5", "ruff==0.11.13", "pyinstaller==6.13.0"]
+
+[project.scripts]
+lanbridge-pro = "lanbridge.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+lanbridge = ["resources/*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+markers = ["windows: requires real Windows APIs", "lan: requires explicitly configured Windows LAN test fixtures"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "B", "UP", "SIM"]
+ignore = ["SIM112"] # Windows environment variable names follow the documented Win32 spelling.

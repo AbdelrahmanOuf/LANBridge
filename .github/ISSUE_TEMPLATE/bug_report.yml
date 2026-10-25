@@ -1,0 +1,51 @@
+name: Bug report
+description: Report a reproducible transfer, networking, build or interface problem.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: "Never post passwords, tokens, personal files or diagnostic dumps. Use SECURITY.md for vulnerabilities."
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Windows version and architecture
+      placeholder: "Windows 11 x64; source / installed / portable preview"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - Transfer / resume / verification
+        - Ethernet / IPv4 / connectivity
+        - SMB sharing / credentials / permissions
+        - Windows build / installer
+        - Interface / language
+        - Documentation
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Use disposable paths and describe the topology without exposing a private network inventory.
+    validations:
+      required: true
+  - type: textarea
+    id: expected_actual
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized error codes or relevant log excerpt
+      render: text
