@@ -65,7 +65,20 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m lanbridge
 ```
 
-Or use `run.ps1`. Start normally; UAC is requested only for approved local system changes.
+For double-click startup, extract the source ZIP completely, then open **`run.cmd`** inside the project
+folder. It starts the adjacent `run.ps1` with Windows PowerShell, prepares `.venv` on first use and keeps
+the console open if startup fails. Install Python 3.12 x64 with the Python Launcher first; first-time
+setup downloads dependencies. Do not try to run files from inside the ZIP.
+
+Opening `run.ps1` directly can open Notepad because `.ps1` is a PowerShell script. To execute it from
+CMD or PowerShell inside the extracted project folder, use:
+
+```bat
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\run.ps1"
+```
+
+The launcher uses a process-only execution policy; it does not save a system/user policy change, and
+Group Policy still takes precedence. Start normally; UAC is requested only for approved local system changes.
 Do not weaken corporate PowerShell or SMB policy to run the app; contact your administrator if needed.
 
 ### First transfer

@@ -92,6 +92,7 @@ LANBridge/
 - **tests/**
   - **integration/**
     - [test_lan.py](../tests/integration/test_lan.py)
+    - [test_windows_launcher.py](../tests/integration/test_windows_launcher.py)
     - [test_windows_native.py](../tests/integration/test_windows_native.py)
   - **unit/**
     - [test_core.py](../tests/unit/test_core.py)
@@ -122,3 +123,4 @@ LANBridge/
 - [requirements-lock.txt](../requirements-lock.txt)
 - [requirements.txt](../requirements.txt)
 - [run.ps1](../run.ps1)
+- [run.cmd](../run.cmd)

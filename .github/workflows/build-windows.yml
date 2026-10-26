@@ -12,6 +12,8 @@ on:
       - "pyproject.toml"
       - "build.py"
       - "build.ps1"
+      - "run.ps1"
+      - "run.cmd"
       - ".github/workflows/build-windows.yml"
   pull_request:
     branches: [main]
